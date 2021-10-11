@@ -1,0 +1,45 @@
+# serverless.yml
+
+service: custom-graphql-api
+custom:
+  Xstage: ${opt:stage, self:provider.stage}
+  Xenv:
+    bucket:
+      prod: s3-prod-bucket-name
+      dev: s3-dev-bucket-name
+#    role:
+#      dev: arn:aws:iam::XXXXXXXXXXXX:role/some-dev-role
+    stackTags:
+      dev:
+        "app:dev": "2021"
+      prod:
+        "app:prod": "2021"
+
+myapp:
+  name: aws
+  lambdaHashingVersion: 20201221
+  runtime: nodejs12.x
+  stage: dev
+  region: ap-southeast-2
+#  profile: some-dev-profile
+  memorySize: 128
+#  role: ${self:custom.Xenv.role.${self:custom.Xstage}}
+  stackTags: ${self:custom.Xenv.stackTags.${self:custom.Xstage}}
+  deploymentBucket: ${self:custom.Xenv.bucket.${self:custom.Xstage}}
+
+package:
+  excludeDevDependencies: false
+  patterns:
+    - '!__tests__/**'
+    - '!.serverless/**'
+    - '!.vscode/**'
+    - '!.gitignore'
+
+functions:
+  graphql:
+    handler: deploy.graphqlHandler
+    events:
+      - http:
+        path: gql
+        method: get
+        cors: true

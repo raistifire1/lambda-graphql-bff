@@ -1,0 +1,7 @@
+node_modules
+dist
+.serverless
+ca-bundle.pem
+.DS_Store
+http-requests-log.http
+

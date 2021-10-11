@@ -1,0 +1,32 @@
+# REST API Documentation
+
+# if you use vscode for development install this plugin to work with this file
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+
+# Get user information from API
+GET https://api.github.com/users/ashinga48
+###
+
+# Dynamic from .env file
+GET https://api.github.com/users/{{GITHUB_USERNAME}}
+###
+
+# POST 1: searchTemplate : valid
+POST {{SERVER_URL}}/{{SEARCH_TEMPLATE}} HTTP/1.1
+content-type: application/json
+
+{  
+    "searchstr": "debug test"
+}
+### 
+
+# CASE 2: searchTemplate : no params
+POST {{SERVER_URL}}/{{SEARCH_TEMPLATE}} HTTP/1.1
+content-type: application/json
+
+{  
+}
+###
+
+
