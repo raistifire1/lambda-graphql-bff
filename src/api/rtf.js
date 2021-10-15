@@ -7,8 +7,8 @@ const getAllPosts = async () => {
     const { API_URL = null, IS_MOCK = false } = process.env;
 
     // return mock data
-    if(IS_MOCK)
-        return [];
+    // if(IS_MOCK)
+    //     return [];
 
     const result = await api.getRequest(API_URL + '?r=' + (new Date()).getTime(), {
         params: {},
