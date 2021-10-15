@@ -1,11 +1,14 @@
 const { merge } = require('lodash');
-const SampleAPI = require("./sample");
+const SampleSchema = require("./sample");
+const RTFSchema = require("./rtf");
 
 module.exports = {
     typeDefs: [
-        SampleAPI.typeDefs
+        SampleSchema.typeDefs,
+        RTFSchema.typeDefs
     ],
     resolvers: merge(
-        SampleAPI.resolvers
+        SampleSchema.resolvers,
+        RTFSchema.resolvers
     )
 }
